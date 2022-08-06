@@ -37,20 +37,31 @@
               
                 
                  {auth.id ? (<p style={{color: "whitesmoke"}}>Welcome , {auth.name}</p>): null}
-               
-                    <i className = 'fas-fa-bars'></i>
-                     <ul className ='nav-menu'/>
-                           <NavButton to ="/login" label ="Login"/>
-                            <NavButton to ="/" label ="Home"/>
-                            <NavButton to ="/trackers" label ="Trackers"/>
-                            <NavButton to ="/profile" label ="Profile"/>
-                           
                  
+                 <NavButton to ="/" label ="Home"/>
+                  { auth.id ?(
+                    <Fragment>
+                    <ul className ='nav-menu'/>
+                    <NavButton to ="/trackers" label ="Trackers"/>
+                    <NavButton to ="/profile" label ="Profile"/>
+                    <NavButton to = "/uploadproduce" label = "Produce" />
+                    </Fragment>
+                 ):( 
+                   <NavButton to ="/login" label ="Login"/>
+                   )
+                 
+                  
                    
 
+                  }
            </div>
           </Fragment>
-            )}
+)}
+
+
+                           
+                   
+
         
 
                 

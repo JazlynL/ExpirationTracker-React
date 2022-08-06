@@ -6,6 +6,7 @@ import  Tracker from "./Tracker"
 
 const Trackers = () => {
       const[trackers,setTrackers] = useState([]);
+     
       const[loading,setLoading] = useState(true);
       const[auth] =useContext(AuthContext);
 
@@ -14,7 +15,14 @@ const Trackers = () => {
         try{
             const trackerResponse = await axios.get(`http://localhost:8080/api/tracker/${auth.id}`)
             const response = await axios.get(`http://localhost:8080/api/tracker/`)
+           
+            
             console.log(response.data);
+          
+            
+            
+            setTrackers(response.data);
+            setLoading(false);
 
         }catch(error){
             console.error(error.response ?
@@ -23,7 +31,17 @@ const Trackers = () => {
         }
     }
     getTrackers();
-    },[])    
+    },[])   
+    
+    const displayTrackers =()=>{
+        return trackers.map(tracker => {
+        return ( 
+        <Tracker tracker ={tracker}/>
+        )
+        
+    })}
+
+  
 
    return(
     <Container>
@@ -31,11 +49,8 @@ const Trackers = () => {
 
         <h1 style ={{ color:"darkred"}}>Trackers</h1>
           {loading ? (<p>Loading...</p>): 
-        (  <Fragment>
-            <Tracker/>
-            <Tracker/>
-          </Fragment>
-        )}
+         displayTrackers()
+        }
          
         
       </Container>

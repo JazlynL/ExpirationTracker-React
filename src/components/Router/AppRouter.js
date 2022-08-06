@@ -7,6 +7,7 @@ import Self from'../Tracker/Self'
 import Trackers from '../Tracker/Trackers'
 import ExampleNav from '../NavBar/ExampleNav'
 import Login from '../Auth/Login'
+import UploadProduce from '../Tracker/UploadProduce'
 
 
 const AppRouter =()=>{
@@ -21,6 +22,7 @@ const AppRouter =()=>{
             <Route path ="/" element = {<Home/>}/>
             <Route path ="/profile" element ={<Self/>}/>
             <Route path ="/trackers" element ={<Trackers/>}/>
+            <Route path ="/uploadproduce" element = {<UploadProduce/>}/>
             <Route path ="/login" element= {<Login/>}/>
         </Routes>
     </Container>)
