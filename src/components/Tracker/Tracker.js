@@ -8,7 +8,7 @@ const Tracker = (props)=>
 
     return(
         <BorderCard>
-            <h1>{props.tracker.name}</h1>
+            <h1>{props.tracker}</h1>
          
        
         

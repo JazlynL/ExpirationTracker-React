@@ -5,38 +5,64 @@ import { AuthContext } from '../Providers/AuthProvider';
 import  Tracker from "./Tracker"
 
 const Trackers = () => {
+     
       const[trackers,setTrackers] = useState([]);
+      
+      const [produce,SetProduce] =  useState(new Set());
      
       const[loading,setLoading] = useState(true);
       const[auth] =useContext(AuthContext);
 
+  
+
     useEffect(()=>{
     const getTrackers = async ()=>{
+        
+        //wrapper class
+        const id = Number(auth.id)
+
         try{
-            const trackerResponse = await axios.get(`http://localhost:8080/api/tracker/${auth.id}`)
+            
+            const trackerResponse = await axios.get(`http://localhost:8080/api/tracker/${id}`)
+           
+           
             const response = await axios.get(`http://localhost:8080/api/tracker/`)
            
-            
-            console.log(response.data);
+
+            console.log(trackerResponse.data.produce);
           
             
             
-            setTrackers(response.data);
-            setLoading(false);
+            setTrackers(trackerResponse.data.produce);
 
+            const setOfProduce = new Set();
+            
+            for(let i = 0 ; i < trackerResponse.data.produce.length;i++ ){
+                setOfProduce.add(trackerResponse.data.produce[i].name)
+
+            }
+            SetProduce(setOfProduce);
+
+            setLoading(false);
+           
+           
+            
         }catch(error){
             console.error(error.response ?
-                 error.response.data : error.message)
-    
+                error.response.data : error.message)
+                
+            }
         }
-    }
-    getTrackers();
+        getTrackers();
+        
     },[])   
     
     const displayTrackers =()=>{
-        return trackers.map(tracker => {
-        return ( 
-        <Tracker tracker ={tracker}/>
+        return Array.from(produce).map((tracker)=> {
+        return (  <Tracker  tracker = {tracker}  />
+        
+       
+
         )
         
     })}
@@ -47,7 +73,8 @@ const Trackers = () => {
     <Container>
 
 
-        <h1 style ={{ color:"darkred"}}>Trackers</h1>
+        <h1 style ={{ color:"darkred"}}>Your Produce Inventory
+        </h1>
           {loading ? (<p>Loading...</p>): 
          displayTrackers()
         }

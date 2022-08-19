@@ -1,4 +1,4 @@
-import React  from "react";
+import React, { Fragment }  from "react";
 import Container  from "../common/Container";
 import Form from '../common/Form';
 import InlineInputContainer from '../common/InlineInputContainer';
@@ -10,7 +10,8 @@ const LoginForm =(props)=> {
     (e) =>{
         props.updateForm(e.target.id,e.target.value)
     }
-    return(<Container>
+    return( <Container>
+    
         <Form onSubmit = {props.onSubmit}>
             <InlineInputContainer>
                 <Input
@@ -32,9 +33,13 @@ const LoginForm =(props)=> {
                type ="password"
                />
                </InlineInputContainer>
-                <Button>ENTER</Button>
+               <Button>ENTER</Button>
                 </Form>
-    </Container>)
+                
+    
+    
+    </Container>
+    )
 }
 
 export default LoginForm;

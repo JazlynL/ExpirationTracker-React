@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React, {useState,useContext} from 'react'
 import Container from '../common/Container'
 import { AuthContext } from '../Providers/AuthProvider'
@@ -5,15 +6,16 @@ import ProduceForm from './ProduceForm'
 
 
 
-const UploadProduce =()=>{
+const UploadProduce = () =>{
     const [query, setQuery] = useState({
-        producename:"",
+        name:"",
         quantity:"",
         type:"",
-        expiraiondate:""
+        expirationDate:""
 
     });
     const[submitting,setSubmitting] = useState(false);
+    const[message,setMessage]= useState("");
     const [auth] = useContext(AuthContext)
 
     const updateForm =(field,value)=>{
@@ -24,19 +26,51 @@ const UploadProduce =()=>{
     }
 
     const onSubmit = async ()=>{
+        setMessage("")
+        setSubmitting(true)
+
+
+        const data = query
+       
+
+        for(let i in data){
+            if(typeof data[i] === 'string'){
+                data.name = data.name[0].toUpperCase() + data.name.substring(1);
+            }
+        }
+       
+                      
         try{
-        console.log('Submit');
+            const response = await axios.post(`http://localhost:8080/api/produce/${auth.id}`, data)
+            
+            console.log(response.data);
+      
+            alert(`${response.data.name} was added`);
+
+       
+
+
+        
     }catch(error){
-        console.error(error.re)
+        
+       
+        setSubmitting(false)
+        console.error(error.response ? error.response.data : error.message)
     }
+    setQuery({ 
+     name:"",
+    quantity:"",
+    type:"",
+    expirationDate:""})
     }
 
 
     return (
         <Container>
             <h1>Upload Your Produce.</h1>
+            {message ? (<p>{message}</p>): null}
             <ProduceForm
-           onSubmit ={onSubmit} query ={query} updateForm ={updateForm} />
+           query ={query}  onSubmit ={onSubmit} updateForm ={updateForm}  submitting ={submitting}/>
         </Container>
     )
 }
