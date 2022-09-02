@@ -23,31 +23,19 @@ function ReactCalender(props){
     }
     
    
-    let currentDate = startOfToday(date)
-
-    const daysOfMonth = eachDayOfInterval({
-      start: startOfMonth(currentDate),
-      end: endOfMonth(currentDate)
-
-   })
-  
-    console.log(daysOfMonth);
+   // let currentDate = startOfToday(date)
+  // console.log(daysOfMonth);
     
     
   
-    const displayDays =()=>{
+    // const displayDays =()=>{
     
-    return daysOfMonth.map((day)=>{
-    return(
-      <Container>
-      
-      
-     
+    // return daysOfMonth.map((day)=>{
+    // return(
+    //   <Container></Container>
         
-      </Container>
-        
-        )
-      })}
+    //     )
+    //   })}
     
    
     return(
@@ -55,7 +43,16 @@ function ReactCalender(props){
       <div className='app'>
       <h1 className='text-center'>Expiration Date</h1>
       <div className='calendar-container'>
-      <Calender style ={{display:"block"}} onChange ={handleChange} defaultValue ={[daysOfMonth.start,daysOfMonth.end]}/> 
+      <Calender 
+      style ={{display:"block"}} 
+      onChange ={handleChange}
+      defaultValue ={date} 
+      minDate={date}
+      
+      // tileDisabled = { 
+      //    ({date,view})=>( view === 'month' && date.getDay() === date-1)
+      //   }
+          /> 
       {/* //value ={date}  */}
      
         </div>
