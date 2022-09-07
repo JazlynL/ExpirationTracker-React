@@ -16,6 +16,8 @@ function ReactCalender(props){
 
    
     const handleChange =(todaysDate)=>{
+
+      // we used props .updateForm, to inherit the data from my produce form 
     props.updateForm("expirationDate", moment(todaysDate).format("MM-DD-yyyy"))
     
     setDate(todaysDate)
