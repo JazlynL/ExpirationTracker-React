@@ -7,8 +7,10 @@ const Tracker = (props)=>
    
 
     return(
-        <BorderCard>
-            <h1>{props.tracker}</h1>
+        <BorderCard tracker = {props.tracker}
+        >
+            
+            <h1>{props.tracker.name}</h1>
          
        
         

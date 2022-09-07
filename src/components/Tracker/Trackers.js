@@ -62,16 +62,17 @@ const Trackers = () => {
     },[])   
     
     const displayTrackers =()=>{
-        return Array.from(produce).map((tracker)=> {
-        return (  <Tracker  tracker = {tracker}  />
-        
-       
+        return(trackers.map((tracker)=>{
+            return(<Tracker tracker ={tracker}/>)
+        }))}
 
-        )
-     
+    //     return Array.from(produce).map((tracker) => {
+    //     return (  <Tracker  tracker = {tracker}  />
         
-    })}
+    //    )})}
    // have the details display....
+
+   // create a use effect to render , and grab new data from the server 
     const displayDetails=()=>{
         return 
     }
@@ -82,28 +83,20 @@ const Trackers = () => {
     <Container>
     
 
-    <div  style={{display:' inline-flex', flexDirection:"row", justifyContent:'flex-end',
-  flexWrap: 'wrap',
-  width:'100%',
-  gap:'20px',
-  backgroundColor:'red'
- }}>
             
-            <div style={{flexDirection:'column' ,flex:'2' ,backgroundColor:'purple'}}>
-            <h1 style ={{ color:"darkred"}}>Your Produce Inventory  </h1>
+            <div style={{flexDirection:'column'}}>
+            <h1 style ={{ color:"thistle"}}>Your Produce Inventory  </h1>
 
                 {loading ? (<p>Loading...</p>): 
                 displayTrackers()
                 }
             
             </div>
-            <div style={{flexDirection:'column' ,flex:'1', backgroundColor:'blue'}}>
-                <h1>Hello</h1>
-            </div>
+           
            
      
    
-        </div>
+        
         {/* create a nested div tag here, first div tag will be the flex row, 
         first child div  contains the display trackers, will be the flex two flex direction  column 
         second child div, conatins the display details aka the produce properties,
